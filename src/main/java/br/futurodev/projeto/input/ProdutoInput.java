@@ -5,26 +5,26 @@ import br.futurodev.projeto.model.Categoria;
 
 public class ProdutoInput {
 
-    private long id;
-    private Categoria categoria;
+    private Long id;
+    private Long idCategoria;
     private String nomeProduto;
     private Double precoProduto;
     private Status statusProduto;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNomeProduto() {

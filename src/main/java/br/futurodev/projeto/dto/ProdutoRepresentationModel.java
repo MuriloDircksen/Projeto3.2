@@ -5,8 +5,8 @@ import br.futurodev.projeto.model.Categoria;
 
 public class ProdutoRepresentationModel {
 
-    private long id;
-    private Categoria categoria;
+    private Long id;
+    private String nomeCategoria;
     private String nomeProduto;
     private Double precoProduto;
     private Status statusProduto;
@@ -19,12 +19,12 @@ public class ProdutoRepresentationModel {
         this.id = id;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public String getNomeProduto() {

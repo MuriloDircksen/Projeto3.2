@@ -26,4 +26,8 @@ public class CadastroCategoriaService {
 
         categoriaRepository.deleteById(idCategoria);
     }
+    @Transactional
+    public Categoria getCategoriaById(Long idCategoria){
+        return categoriaRepository.findById(idCategoria).get();
+    }
 }

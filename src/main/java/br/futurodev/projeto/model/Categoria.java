@@ -15,7 +15,7 @@ public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String nomeCategoria;
@@ -25,11 +25,11 @@ public class Categoria implements Serializable {
     @JsonManagedReference
     private List<Produto> produtos = new ArrayList<Produto>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,7 +62,7 @@ public class Categoria implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Categoria categoria = (Categoria) o;
-        return id == categoria.id;
+        return id.equals(categoria.id);
     }
 
     @Override
