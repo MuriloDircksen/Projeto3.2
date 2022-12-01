@@ -12,11 +12,13 @@ import br.futurodev.projeto.service.CadastroCategoriaService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class CategoriaController {
     private CadastroCategoriaService cadastroCategoriaService;
     @ApiOperation("Cadastrar Categoria")
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<CategoriaRepresentationModel> cadastrar (@RequestBody CategoriaInput categoriaInput){
+    public ResponseEntity<CategoriaRepresentationModel> cadastrar (@RequestBody @Valid CategoriaInput categoriaInput){
 
         Categoria categoria =cadastroCategoriaService.salvar(toDomainObject(categoriaInput));
         return new ResponseEntity<CategoriaRepresentationModel>(toModel(categoria), HttpStatus.OK);
@@ -41,11 +43,11 @@ public class CategoriaController {
         return new ResponseEntity<CategoriaRepresentationModel>(toModel(categoria), HttpStatus.OK);
     }
 
-    @ApiOperation("Deletar categoria")
+    @ApiOperation("Deletar categoria sem produto cadastrado")
     @DeleteMapping(value = "/")
     @ResponseBody
 
-    public ResponseEntity<String> deletar (@RequestParam Long idCategoria){
+    public ResponseEntity<String> deletar (@ApiParam(value = "ID categoria", example ="1") @RequestParam Long idCategoria){
             Categoria categoria = new Categoria();
             categoria = cadastroCategoriaService.getCategoriaById(idCategoria);
         if(categoria.getProdutos().isEmpty()) {
