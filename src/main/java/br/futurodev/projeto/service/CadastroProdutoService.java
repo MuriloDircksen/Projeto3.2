@@ -38,6 +38,13 @@ public class CadastroProdutoService {
     }
 
     @Transactional
+    public List<Produto> getListaProdutos(){
+        List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
+
+        return produtos;
+    }
+
+    @Transactional
     public Produto getProdutoById(Long idProduto){
         return produtoRepository.findById(idProduto).get();
     }

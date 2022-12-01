@@ -48,6 +48,18 @@ public class ProdutoController {
         cadastroProdutoService.deletar(idProduto);
         return new ResponseEntity<>("Produto deletado!", HttpStatus.OK);
     }
+
+    @ApiOperation("Buscar produtos cadastrados")
+    @GetMapping(value = "/", produces = "application/json")
+
+    public ResponseEntity<List<ProdutoRepresentationModel>> getListaProduto(){
+
+        List<Produto> produtos = cadastroProdutoService.getListaProdutos();
+
+
+        List<ProdutoRepresentationModel> produtosRepresentationModel = toColletionModel(produtos);
+        return new ResponseEntity<List<ProdutoRepresentationModel>>(produtosRepresentationModel,HttpStatus.OK);
+    }
     @GetMapping(value = "/somar", produces = "application/json")
     @ResponseBody
     public ResponseEntity<String> somaProdutosComprados() {
@@ -71,6 +83,10 @@ public class ProdutoController {
         produtoRepresentationModel.setNomeCategoria(produto.getCategoria().getNomeCategoria());
 
         return produtoRepresentationModel;
+    }
+    private List<ProdutoRepresentationModel> toColletionModel(List<Produto> produtos){
+        return produtos.stream()
+                .map(produto ->toModel(produto)).collect(Collectors.toList());
     }
 
 

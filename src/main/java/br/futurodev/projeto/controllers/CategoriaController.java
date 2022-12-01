@@ -2,10 +2,12 @@ package br.futurodev.projeto.controllers;
 
 import br.futurodev.projeto.dto.CategoriaRepresentationModel;
 
+import br.futurodev.projeto.dto.ProdutoRepresentationModel;
 import br.futurodev.projeto.input.CategoriaInput;
 
 import br.futurodev.projeto.model.Categoria;
 
+import br.futurodev.projeto.model.Produto;
 import br.futurodev.projeto.service.CadastroCategoriaService;
 
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(tags = "Categoria")
 @RestController
@@ -54,8 +57,22 @@ public class CategoriaController {
         }
 
     }
+    @ApiOperation("Buscar produtos cadastrados")
+    @GetMapping(value = "/", produces = "application/json")
+
+    public ResponseEntity<List<CategoriaRepresentationModel>> getListaCategoria(){
+
+        List<Categoria> categorias = cadastroCategoriaService.getListaCategorias();
 
 
+        List<CategoriaRepresentationModel> categoriasRepresentationModel = toColletionModel(categorias);
+        return new ResponseEntity<List<CategoriaRepresentationModel>>(categoriasRepresentationModel,HttpStatus.OK);
+    }
+
+    private List<CategoriaRepresentationModel> toColletionModel(List<Categoria> categorias){
+        return categorias.stream()
+                .map(categoria ->toModel(categoria)).collect(Collectors.toList());
+    }
 
     private CategoriaRepresentationModel toModel(Categoria categoria) {
         CategoriaRepresentationModel categoriaRepresentationModel = new CategoriaRepresentationModel();

@@ -12,6 +12,7 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
     //@Query(value = "select p from PedidoModel p where p.clienteModel.nome like %?1%")
     //fazer querry que retorne todos os status true
-    @Query(value = "select SUM(p.precoProduto)from Produto p where p.statusProduto = COMPRADO")
+    @Query(value = "select SUM(p.precoProduto)from Produto p where p.statusProduto = 0")
     ArrayList<Produto> getProdutos();
+
 }
