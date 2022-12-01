@@ -43,4 +43,5 @@ public class CategoriaRepresentationModel {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
+
 }

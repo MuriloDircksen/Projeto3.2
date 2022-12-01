@@ -13,6 +13,9 @@ public class CadastroProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private CadastroProdutoService cadastroProdutoService;
+
     @Transactional
     public Produto salvar(Produto produto){
 
@@ -22,8 +25,10 @@ public class CadastroProdutoService {
 
     @Transactional
     public void deletar(Long idProduto){
-
-
+        Produto produto=new Produto();
+        produto=cadastroProdutoService.getProdutoById(idProduto);
+        produto.setCategoria(null);
+        cadastroProdutoService.salvar(produto);
         produtoRepository.deleteById(idProduto);
     }
 
@@ -31,5 +36,12 @@ public class CadastroProdutoService {
     public List<Produto> getProdutoByStatus(){
         return produtoRepository.getProdutos();
     }
+
+    @Transactional
+    public Produto getProdutoById(Long idProduto){
+        return produtoRepository.findById(idProduto).get();
+    }
+
+
 
 }

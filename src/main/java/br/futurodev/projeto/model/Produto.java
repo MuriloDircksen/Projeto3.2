@@ -22,7 +22,7 @@ public class Produto implements Serializable {
 
     @Column(nullable = false)
     private String nomeProduto;
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 2)
     private Double precoProduto;
     private Status statusProduto;
 

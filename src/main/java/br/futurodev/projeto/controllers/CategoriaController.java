@@ -43,7 +43,8 @@ public class CategoriaController {
     @ResponseBody
 
     public ResponseEntity<String> deletar (@RequestParam Long idCategoria){
-        Categoria categoria = new Categoria();
+            Categoria categoria = new Categoria();
+            categoria = cadastroCategoriaService.getCategoriaById(idCategoria);
         if(categoria.getProdutos().isEmpty()) {
             cadastroCategoriaService.deletar(idCategoria);
             return new ResponseEntity<String>("Categoria deletado!", HttpStatus.OK);
@@ -62,6 +63,7 @@ public class CategoriaController {
         categoriaRepresentationModel.setId(categoria.getId());
         categoriaRepresentationModel.setNomeCategoria(categoria.getNomeCategoria());
         categoriaRepresentationModel.setDescricaoCategoria(categoria.getDescricaoCategoria());
+        categoriaRepresentationModel.setProdutos(categoria.getProdutos());
 
         return categoriaRepresentationModel;
     }

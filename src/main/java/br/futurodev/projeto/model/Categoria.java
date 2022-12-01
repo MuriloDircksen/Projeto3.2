@@ -21,7 +21,7 @@ public class Categoria implements Serializable {
     private String nomeCategoria;
     private String descricaoCategoria;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<Produto> produtos = new ArrayList<Produto>();
 
