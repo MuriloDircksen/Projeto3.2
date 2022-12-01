@@ -1,6 +1,7 @@
 package br.futurodev.projeto.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -21,8 +22,13 @@ public class Categoria implements Serializable {
     private String nomeCategoria;
     private String descricaoCategoria;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    /*@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
+    private List<Produto> produtos = new ArrayList<Produto>();
+*/
+    @OneToMany
+    @JoinColumn(name = "idProduto", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_produto")  )
+    @JsonBackReference
     private List<Produto> produtos = new ArrayList<Produto>();
 
     public Long getId() {

@@ -59,7 +59,7 @@ public class CategoriaController {
         }
 
     }
-    @ApiOperation("Buscar produtos cadastrados")
+    @ApiOperation("Buscar categorias cadastrados")
     @GetMapping(value = "/", produces = "application/json")
 
     public ResponseEntity<List<CategoriaRepresentationModel>> getListaCategoria(){

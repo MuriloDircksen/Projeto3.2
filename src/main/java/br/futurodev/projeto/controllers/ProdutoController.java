@@ -68,12 +68,6 @@ public class ProdutoController {
     @ResponseBody
     public ResponseEntity<String> somaProdutosComprados() {
 
-        //double soma=0;
-       /* List<Produto> produtos = cadastroProdutoService.getProdutoByStatus();
-        for(int i=0; i<produtos.size();i++) {
-            soma+=produtos.get(i).getPrecoProduto();
-        }
-*/
         return new ResponseEntity<String>("Soma total das compras: R$ "+cadastroProdutoService.getProdutoByStatus(), HttpStatus.OK);
     }
 

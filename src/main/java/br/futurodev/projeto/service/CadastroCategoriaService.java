@@ -30,6 +30,9 @@ public class CadastroCategoriaService {
     @Transactional
     public List<Categoria> getListaCategorias(){
         List<Categoria> categorias = (List<Categoria>) categoriaRepository.findAll();
+        for (Categoria cat:categorias) {
+            cat.getProdutos().isEmpty();
+        }
 
         return categorias;
     }

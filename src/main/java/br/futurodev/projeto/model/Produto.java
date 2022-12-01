@@ -24,6 +24,7 @@ public class Produto implements Serializable {
     private String nomeProduto;
     @Column(nullable = false, precision = 2)
     private Double precoProduto;
+    @Enumerated(EnumType.STRING)
     private Status statusProduto;
 
     public Long getId() {
