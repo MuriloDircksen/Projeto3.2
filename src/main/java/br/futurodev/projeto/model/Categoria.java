@@ -26,7 +26,7 @@ public class Categoria implements Serializable {
     @JsonManagedReference
     private List<Produto> produtos = new ArrayList<Produto>();
 */
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "idProduto", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_produto")  )
     @JsonBackReference
     private List<Produto> produtos = new ArrayList<Produto>();

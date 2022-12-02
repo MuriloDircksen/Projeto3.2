@@ -10,6 +10,7 @@ import br.futurodev.projeto.model.Categoria;
 import br.futurodev.projeto.model.Produto;
 import br.futurodev.projeto.service.CadastroCategoriaService;
 
+import br.futurodev.projeto.service.CadastroProdutoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -28,6 +29,9 @@ import java.util.stream.Collectors;
 public class CategoriaController {
     @Autowired
     private CadastroCategoriaService cadastroCategoriaService;
+
+    @Autowired
+    private CadastroProdutoService cadastroProdutoService;
     @ApiOperation("Cadastrar Categoria")
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<CategoriaRepresentationModel> cadastrar (@RequestBody @Valid CategoriaInput categoriaInput){
@@ -78,11 +82,11 @@ public class CategoriaController {
 
     private CategoriaRepresentationModel toModel(Categoria categoria) {
         CategoriaRepresentationModel categoriaRepresentationModel = new CategoriaRepresentationModel();
-
+        List<Produto> produtos = cadastroProdutoService.getProdutosPorCategoria(categoria.getId());
         categoriaRepresentationModel.setId(categoria.getId());
         categoriaRepresentationModel.setNomeCategoria(categoria.getNomeCategoria());
         categoriaRepresentationModel.setDescricaoCategoria(categoria.getDescricaoCategoria());
-        categoriaRepresentationModel.setProdutos(categoria.getProdutos());
+        categoriaRepresentationModel.setProdutos(produtos);
 
         return categoriaRepresentationModel;
     }

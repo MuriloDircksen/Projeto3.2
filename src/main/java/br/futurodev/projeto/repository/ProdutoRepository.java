@@ -15,4 +15,6 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query(value = "select SUM(p.precoProduto)from Produto p where p.statusProduto = 'COMPRADO'")
     ArrayList<Produto> getProdutos();
 
+    @Query(value = "from Produto p where p.categoria.id = ?1")
+    ArrayList<Produto> getProdutosPorCategoria(Long idCategoria);
 }

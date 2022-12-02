@@ -43,7 +43,11 @@ public class CadastroProdutoService {
 
         return produtos;
     }
+    @Transactional
+    public List<Produto> getProdutosPorCategoria(Long idCategoria){
 
+        return produtoRepository.getProdutosPorCategoria(idCategoria);
+    }
     @Transactional
     public Produto getProdutoById(Long idProduto){
         return produtoRepository.findById(idProduto).get();
